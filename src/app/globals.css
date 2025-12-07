@@ -24,3 +24,28 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+/* Prevent table widgets from forcing horizontal scroll */
+.react-grid-item {
+  overflow: visible !important;
+}
+
+.react-grid-item > div {
+  width: 100%;
+}
+
+/* Tables expand naturally */
+table {
+  table-layout: auto !important;
+}
+/* Prevent widgets from stretching to full width */
+
+/* Prevent widgets from stretching to full width */
+.widget-container {
+  width: auto !important;
+  max-width: 100% !important;
+}
+
+/* Reactive sizing inside grid */
+.react-grid-item {
+  width: auto !important;
+}
