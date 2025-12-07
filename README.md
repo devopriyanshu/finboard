@@ -1,8 +1,8 @@
 # FinBoard – Custom Finance Dashboard
 
-A customizable **real-time finance dashboard** that lets users build their own monitoring panels by connecting to any financial API and mapping the data dynamically.
+A customizable real-time finance dashboard that lets users build their own monitoring panels by connecting to any financial API, mapping fields dynamically, and visualizing data using cards, tables, and charts.
 
-The application supports robust state management, data persistence, and intuitive widget configuration.
+The application includes JSON explorer tools, caching, export/import,state management, data persistence and a fully modular widget system with advanced configuration options.
 
 ---
 
@@ -73,13 +73,13 @@ The system supports creating and managing widgets, including deletion and config
 
 ## 🛠 Tech Stack
 
-| Category      | Tools                              |
-| :------------ | :--------------------------------- |
-| **Framework** | **Next.js 14**                     |
-| **Styling**   | **Tailwind CSS**                   |
-| **State**     | **Redux Toolkit**                  |
-| **Charts**    | **Recharts** (or Chart.js/similar) |
-| **Icons**     | **Lucide React**                   |
+| Category      | Tools             |
+| :------------ | :---------------- |
+| **Framework** | **Next.js 14**    |
+| **Styling**   | **Tailwind CSS**  |
+| **State**     | **Redux Toolkit** |
+| **Charts**    | **Recharts**      |
+| **Icons**     | **Lucide React**  |
 
 ---
 
@@ -94,7 +94,7 @@ The system supports creating and managing widgets, including deletion and config
 
 1.  **Clone the Repo**
     ```bash
-    git clone [https://github.com/yourusername/finboard.git](https://github.com/yourusername/finboard.git)
+    git clone [https://github.com/devopriyanshu/finboard.git](https://github.com/devopriyanshu/finboard.git)
     cd finboard
     ```
 2.  **Install Dependencies**
