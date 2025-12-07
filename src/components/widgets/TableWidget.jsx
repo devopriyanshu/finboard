@@ -8,17 +8,14 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+
 import { useState, useEffect } from "react";
 
-/* -------------------------------------------------------
-    Resolve nested path: a.b.c
---------------------------------------------------------*/
 /* -------------------------------------------------------
     Resolve nested path: supports a.b.c[2].price
 --------------------------------------------------------*/
 const resolvePath = (obj, path) => {
   if (!obj || !path) return undefined;
-
   const parts = path.split(".");
   let current = obj;
 
@@ -50,23 +47,6 @@ export const EnhancedTableWidget = ({ widget, onDelete, onConfigure }) => {
   const [page, setPage] = useState(1);
 
   const pageSize = 10;
-
-  const resolvePath = (obj, path) => {
-    if (!obj || !path) return undefined;
-    const parts = path.split(".");
-    let current = obj;
-    for (let part of parts) {
-      const arrayMatch = part.match(/^(.+?)\[(\d+)\]$/);
-      if (arrayMatch) {
-        const [, key, index] = arrayMatch;
-        current = current?.[key]?.[Number(index)];
-      } else {
-        current = current?.[part];
-      }
-      if (current === undefined || current === null) return undefined;
-    }
-    return current;
-  };
 
   const buildUrl = () => {
     let url = widget.apiUrl;
@@ -145,6 +125,7 @@ export const EnhancedTableWidget = ({ widget, onDelete, onConfigure }) => {
 
   return (
     <div className="bg-slate-900 border border-slate-700 rounded-xl p-4 sm:p-5 shadow-xl text-white">
+      {/* HEADER */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
         <div className="flex gap-2 items-center">
           <h2 className="text-base sm:text-lg font-semibold">{widget.name}</h2>
@@ -152,12 +133,22 @@ export const EnhancedTableWidget = ({ widget, onDelete, onConfigure }) => {
             {widget.interval}s
           </span>
         </div>
-        <div className="flex gap-2 sm:gap-3 text-slate-400">
+
+        {/* ACTIONS */}
+        <div className="flex gap-3 text-slate-400">
           <RotateCcw
             className="cursor-pointer hover:text-white transition-colors"
             size={18}
             onClick={fetchData}
           />
+
+          {/* ✅ SETTINGS BUTTON ADDED */}
+          <Settings
+            size={18}
+            className="cursor-pointer hover:text-white transition-colors"
+            onClick={() => onConfigure(widget)}
+          />
+
           <Trash
             className="cursor-pointer hover:text-red-400 transition-colors"
             size={18}
@@ -166,6 +157,7 @@ export const EnhancedTableWidget = ({ widget, onDelete, onConfigure }) => {
         </div>
       </div>
 
+      {/* SEARCH */}
       <div className="relative mb-4">
         <input
           className="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 pl-8 text-sm focus:outline-none focus:border-slate-600"
@@ -176,6 +168,7 @@ export const EnhancedTableWidget = ({ widget, onDelete, onConfigure }) => {
         <Search size={16} className="absolute left-2 top-2.5 text-slate-500" />
       </div>
 
+      {/* TABLE */}
       <div className="overflow-x-auto -mx-4 sm:mx-0">
         <div className="inline-block min-w-full align-middle">
           <table className="min-w-full text-sm">
@@ -199,6 +192,7 @@ export const EnhancedTableWidget = ({ widget, onDelete, onConfigure }) => {
                 ))}
               </tr>
             </thead>
+
             <tbody>
               {!apiData ? (
                 <tr>
@@ -247,23 +241,26 @@ export const EnhancedTableWidget = ({ widget, onDelete, onConfigure }) => {
         </div>
       </div>
 
+      {/* PAGINATION */}
       {rows.length > 0 && (
         <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-4 text-sm text-slate-400">
           <button
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page <= 1}
-            className="flex gap-1 items-center disabled:opacity-40 disabled:cursor-not-allowed hover:text-white transition-colors"
+            className="flex gap-1 items-center disabled:opacity-40 hover:text-white"
           >
             <ChevronLeft size={16} /> Prev
           </button>
-          <span className="text-center">
+
+          <span>
             Page {page} / {totalPages} • {pageRows.length} of {searched.length}{" "}
             rows
           </span>
+
           <button
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
             disabled={page >= totalPages}
-            className="flex gap-1 items-center disabled:opacity-40 disabled:cursor-not-allowed hover:text-white transition-colors"
+            className="flex gap-1 items-center disabled:opacity-40 hover:text-white"
           >
             Next <ChevronRight size={16} />
           </button>

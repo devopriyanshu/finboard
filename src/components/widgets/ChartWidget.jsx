@@ -9,7 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { RefreshCcw, Trash } from "lucide-react";
+import { RefreshCcw, Trash, Settings } from "lucide-react";
 
 // Same path resolver from your dashboard
 const resolvePath = (obj, path) => {
@@ -30,7 +30,7 @@ const resolvePath = (obj, path) => {
   return current;
 };
 
-// Extract array rows (same as TableWidget)
+// Extract array rows
 const extractRows = (data, arrayPath) => {
   if (!data || !arrayPath) return [];
   const arr = resolvePath(data, arrayPath);
@@ -85,30 +85,8 @@ export const EnhancedChartWidget = ({ widget, onDelete, onConfigure }) => {
     return () => clearInterval(timer);
   }, [widget.apiUrl, widget.params, widget.headers, widget.interval]);
 
-  const resolvePath = (obj, path) => {
-    if (!obj || !path) return undefined;
-    const parts = path.split(".");
-    let current = obj;
-    for (let part of parts) {
-      const arrayMatch = part.match(/^(.+?)\[(\d+)\]$/);
-      if (arrayMatch) {
-        const [, key, index] = arrayMatch;
-        current = current?.[key]?.[Number(index)];
-      } else {
-        current = current?.[part];
-      }
-      if (current === undefined || current === null) return undefined;
-    }
-    return current;
-  };
-
-  const extractRows = (data, arrayPath) => {
-    if (!data || !arrayPath) return [];
-    const arr = resolvePath(data, arrayPath);
-    return Array.isArray(arr) ? arr : [];
-  };
-
   const rows = extractRows(apiData, widget.arrayPath);
+
   const chartData = rows.map((row) => ({
     [widget.chartXField]: row[widget.chartXField],
     [widget.chartYField]: row[widget.chartYField],
@@ -116,19 +94,35 @@ export const EnhancedChartWidget = ({ widget, onDelete, onConfigure }) => {
 
   return (
     <div className="bg-slate-900 border border-slate-700 rounded-xl p-4 sm:p-5 shadow-xl text-white h-full">
+      {/* -----------------------------------------------------------
+          HEADER WITH SETTINGS BUTTON (NEW)
+      ------------------------------------------------------------ */}
       <div className="flex justify-between items-center mb-4">
+        {/* Title */}
         <div className="flex items-center gap-2">
           <h2 className="text-base sm:text-lg font-semibold">{widget.name}</h2>
           <span className="text-xs bg-slate-700 px-2 py-1 rounded">
             {widget.interval}s
           </span>
         </div>
-        <div className="flex gap-2 sm:gap-3 text-slate-400">
+
+        {/* ACTION BUTTONS */}
+        <div className="flex gap-3 text-slate-400">
+          {/* Refresh */}
           <RefreshCcw
             className="cursor-pointer hover:text-white transition-colors"
             size={18}
             onClick={fetchData}
           />
+
+          {/* ✅ CONFIG SETTINGS BUTTON */}
+          <Settings
+            className="cursor-pointer hover:text-white transition-colors"
+            size={18}
+            onClick={() => onConfigure(widget)}
+          />
+
+          {/* Delete */}
           <Trash
             className="cursor-pointer hover:text-red-400 transition-colors"
             size={18}
@@ -137,6 +131,9 @@ export const EnhancedChartWidget = ({ widget, onDelete, onConfigure }) => {
         </div>
       </div>
 
+      {/* -----------------------------------------------------------
+          CHART AREA
+      ------------------------------------------------------------ */}
       <div className="h-64 sm:h-80 lg:h-96">
         {loading ? (
           <div className="flex items-center justify-center h-full text-slate-400">
@@ -161,11 +158,7 @@ export const EnhancedChartWidget = ({ widget, onDelete, onConfigure }) => {
                 textAnchor="end"
                 height={60}
               />
-              <YAxis
-                stroke="#94a3b8"
-                tick={{ fontSize: 11 }}
-                domain={["auto", "auto"]}
-              />
+              <YAxis stroke="#94a3b8" tick={{ fontSize: 11 }} />
               <Tooltip
                 contentStyle={{
                   backgroundColor: "#1e293b",
@@ -188,6 +181,9 @@ export const EnhancedChartWidget = ({ widget, onDelete, onConfigure }) => {
         )}
       </div>
 
+      {/* -----------------------------------------------------------
+          FOOTER
+      ------------------------------------------------------------ */}
       <div className="text-xs text-slate-500 border-t border-slate-700 pt-2 mt-3">
         Last updated: {lastUpdated} • {chartData.length} data points
       </div>
