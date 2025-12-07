@@ -1,8 +1,8 @@
 # FinBoard – Custom Finance Dashboard
 
-[cite_start]A customizable **real-time finance dashboard** that lets users build their own monitoring panels by connecting to any financial API and mapping the data dynamically[cite: 4, 18, 87].
+A customizable **real-time finance dashboard** that lets users build their own monitoring panels by connecting to any financial API and mapping the data dynamically.
 
-[cite_start]The application supports robust state management, data persistence, and intuitive widget configuration[cite: 9, 33].
+The application supports robust state management, data persistence, and intuitive widget configuration.
 
 ---
 
@@ -29,57 +29,57 @@
 
 ### 🔧 1. Build & Customize Widgets
 
-[cite_start]The system supports creating and managing widgets, including deletion and configuration[cite: 17, 31, 33].
+The system supports creating and managing widgets, including deletion and configuration.
 
-| Type                 | Description                                                                                             | Use Case                                                                           |
-| :------------------- | :------------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------- |
-| **📊 Card Widgets**  | [cite_start]Displays single key metrics, prices, change %, etc..                                        | [cite_start]Watchlist metrics, Market Gainers, Performance Data[cite: 23, 25, 27]. |
-| **📋 Table Widgets** | [cite_start]A paginated list or grid of data with filters and search functionality.                     | [cite_start]Stock screeners, comprehensive financial data lists[cite: 28].         |
-| **📈 Chart Widgets** | [cite_start]Line or Candle graphs showing stock prices over various intervals (Daily, Weekly, Monthly). | Historical trends and volatility analysis.                                         |
+| Type                 | Description                                                                                 | Use Case                                             |
+| :------------------- | :------------------------------------------------------------------------------------------ | :--------------------------------------------------- |
+| **📊 Card Widgets**  | Displays single key metrics, prices, change %, etc..                                        | Watchlist metrics, Market Gainers, Performance Data. |
+| **📋 Table Widgets** | A paginated list or grid of data with filters and search functionality.                     | Stock screeners, comprehensive financial data lists. |
+| **📈 Chart Widgets** | Line or Candle graphs showing stock prices over various intervals (Daily, Weekly, Monthly). | Historical trends and volatility analysis.           |
 
 **Widget Capabilities**
 
-- [cite_start]Add unlimited widgets[cite: 18].
-- [cite_start]Configure each widget independently[cite: 33].
-- [cite_start]Auto-refresh with configurable intervals[cite: 46, 88].
-- [cite_start]Fully responsive layout[cite: 92].
+- Add unlimited widgets.
+- Configure each widget independently.
+- Auto-refresh with configurable intervals.
+- Fully responsive layout.
 
 ### 🌐 2. Advanced API Handling
 
-- [cite_start]**Smart Data Mapping:** Users can explore API responses and select specific fields to display, supporting dynamic integration with multiple financial APIs[cite: 7, 87, 99].
-- [cite_start]**API Controls:** Supports custom headers, dynamic query params, flexible refresh intervals[cite: 46, 88].
-- [cite_start]**Error Handling:** Comprehensive handling of loading, error, and empty data states[cite: 93].
+- **Smart Data Mapping:** Users can explore API responses and select specific fields to display, supporting dynamic integration with multiple financial APIs.
+- **API Controls:** Supports custom headers, dynamic query params, flexible refresh intervals.
+- **Error Handling:** Comprehensive handling of loading, error, and empty data states.
 
 ### 🎨 3. Modern, Clean UI
 
 - **Design:** Dark theme with Tailwind CSS.
-- [cite_start]**Experience:** Mobile-friendly layout and accessible modals[cite: 92].
-- [cite_start]**States:** Smooth skeleton loaders for handling loading and error states[cite: 93].
+- **Experience:** Mobile-friendly layout and accessible modals.
+- **States:** Smooth skeleton loaders for handling loading and error states.
 
 ### 💾 4. Data Persistence
 
-- [cite_start]**Browser Storage Integration:** All widget configurations and dashboard layouts persist across sessions using Redux Toolkit[cite: 9, 95].
-- [cite_start]**State Recovery:** Complete dashboard restoration upon page refresh[cite: 96].
-- [cite_start]**Configuration Backup:** Export/import functionality for dashboard configurations.
+- **Browser Storage Integration:** All widget configurations and dashboard layouts persist across sessions using Redux Toolkit.
+- **State Recovery:** Complete dashboard restoration upon page refresh.
+- **Configuration Backup:** Export/import functionality for dashboard configurations.
 
 ### ⚡ 5. Performance Optimizations
 
 - Lazy-loaded modals via `React.Suspense`
 - Memoized widgets (`React.memo`)
-- [cite_start]Efficient data fetching with optimized polling intervals.
+- Efficient data fetching with optimized polling intervals.
 - Debounced table search
 
 ---
 
 ## 🛠 Tech Stack
 
-| Category      | Tools                                                     |
-| :------------ | :-------------------------------------------------------- |
-| **Framework** | [cite_start]**Next.js 14** [cite: 11]                     |
-| **Styling**   | [cite_start]**Tailwind CSS** [cite: 12]                   |
-| **State**     | [cite_start]**Redux Toolkit** [cite: 13]                  |
-| **Charts**    | [cite_start]**Recharts** (or Chart.js/similar) [cite: 14] |
-| **Icons**     | **Lucide React**                                          |
+| Category      | Tools                              |
+| :------------ | :--------------------------------- |
+| **Framework** | **Next.js 14**                     |
+| **Styling**   | **Tailwind CSS**                   |
+| **State**     | **Redux Toolkit**                  |
+| **Charts**    | **Recharts** (or Chart.js/similar) |
+| **Icons**     | **Lucide React**                   |
 
 ---
 
